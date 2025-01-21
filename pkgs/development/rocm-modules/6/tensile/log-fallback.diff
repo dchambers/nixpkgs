@@ -41,24 +41,7 @@ index 9546d3c2..19a6735a 100644
          restoreDefaultGlobalParameters()
          assignGlobalParameters({})
          detectGlobalCurrentISA()
-@@ -946,11 +949,15 @@ if __name__ == '__main__':
-     output_path_basename = os.path.splitext(output_path)[0]
- 
-     if debug_build:
--        build_args = ['-x', 'assembler', '-target', 'amdgcn-amd-amdhsa', '-mcode-object-version=4', f'-mcpu={arch}', '-mwavefrontsize64', '-c', '-g', '-o', f'{output_path_basename}.o', f'{output_path_basename}.s']
-+        build_args = ['-x', 'assembler', '-target', 'amdgcn-amd-amdhsa', '-mcode-object-version=5', f'-mcpu={arch}', '-mwavefrontsize64', '-c', '-g', '-o', f'{output_path_basename}.o', f'{output_path_basename}.s']
-     else:
--        build_args = ['-x', 'assembler', '-target', 'amdgcn-amd-amdhsa', '-mcode-object-version=4', f'-mcpu={arch}', '-mwavefrontsize64', '-c', '-o', f'{output_path_basename}.o', f'{output_path_basename}.s']
-+        build_args = ['-x', 'assembler', '-target', 'amdgcn-amd-amdhsa', '-mcode-object-version=5', f'-mcpu={arch}', '-mwavefrontsize64', '-c', '-o', f'{output_path_basename}.o', f'{output_path_basename}.s']
- 
-     ret = subprocess.run([toolchain_path] + build_args)
-+    if ret > 0:
-+        exit(ret)
-     ret = subprocess.run([toolchain_path, '-target', 'amdcgn-amdhsa', '-o', f'{output_path_basename}.co', f'{output_path_basename}.o'])
-+    if ret > 0:
-+        exit(ret)
-     layernorm.dump('yaml', f'{output_path_basename}.yaml')
- 
+
 diff --git a/Tensile/Ops/SoftmaxGenerator.py b/Tensile/Ops/SoftmaxGenerator.py
 index dc4c53aa..57851859 100644
 --- a/Tensile/Ops/SoftmaxGenerator.py
