@@ -55,13 +55,3 @@ index dc4c53aa..57851859 100644
  
      def _validate(self):
          assert self.num_cols * self.num_rows == self.num_workitems
-@@ -719,5 +721,9 @@ if __name__ == '__main__':
-         build_args = ['-x', 'assembler', '-target', 'amdgcn-amd-amdhsa', '-mcode-object-version=4', f'-mcpu={arch}', '-mwavefrontsize64', '-c', '-o', f'{output_path_basename}.o', f'{output_path_basename}.s']
- 
-     ret = subprocess.run([toolchain_path] + build_args)
-+    if ret > 0:
-+        exit(ret)
-     ret = subprocess.run([toolchain_path, '-target', 'amdcgn-amdhsa', '-o', f'{output_path_basename}.co', f'{output_path_basename}.o'])
-+    if ret > 0:
-+        exit(ret)
-     softmax.dump('yaml', f'{output_path_basename}.yaml')
