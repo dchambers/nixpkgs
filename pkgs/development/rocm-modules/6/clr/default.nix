@@ -197,10 +197,10 @@ stdenv.mkDerivation (finalAttrs: {
     fi
     CORE_LIM=$(( ''${NIX_LOAD_LIMIT:-''${CORE_LIM:-$(nproc)}} / 2 ))
     # Set HIPCC_JOBS with min and max constraints
-    export HIPCC_JOBS=$CORE_LIM
-    export HIPCC_JOBS_LINK=$CORE_LIM
-    export CFLAGS="''${CFLAGS:-} -parallel-jobs=$CORE_LIM"
-    export CXXFLAGS="''${CXXFLAGS:-} -parallel-jobs=$CORE_LIM"
+    # export HIPCC_JOBS=$CORE_LIM
+    # export HIPCC_JOBS_LINK=$CORE_LIM
+    # export CFLAGS="''${CFLAGS:-} -parallel-jobs=$CORE_LIM"
+    # export CXXFLAGS="''${CXXFLAGS:-} -parallel-jobs=$CORE_LIM"
     #export HIPCC_COMPILE_FLAGS_APPEND="-O3 -Wno-format-nonliteral -parallel-jobs=$HIPCC_JOBS"
     export HIP_PATH="${placeholder "out"}"
     export HIP_PLATFORM=amd
